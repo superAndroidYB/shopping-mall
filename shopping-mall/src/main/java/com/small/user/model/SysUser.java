@@ -18,6 +18,9 @@ public class SysUser extends BaseEntity{
 	
 	@Column(name="user_phone",columnDefinition="varchar(15) comment '用户手机号'")
 	private String userPhone;
+	
+	@Column(name="user_type",columnDefinition="varchar(15) comment '用户类型：0,普通用户；1,代理用户'")
+	private String userType;
 
 	public String getUserName() {
 		return userName;
@@ -42,4 +45,20 @@ public class SysUser extends BaseEntity{
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	@Override
+	public String toString() {
+		return "SysUser [userName=" + userName + ", userPassword=" + userPassword + ", userPhone=" + userPhone
+				+ ", userType=" + userType + "]";
+	}
+	
+	
 }
