@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableScheduling
-@ComponentScan(basePackages={"com.small.*"})
+@ComponentScan(basePackages={"com.small.*.model"})
 public class ShoppingMallApplication {
 
 	public static void main(String[] args) {
