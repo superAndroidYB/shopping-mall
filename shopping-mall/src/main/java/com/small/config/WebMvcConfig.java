@@ -6,7 +6,10 @@ import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.small.interceptor.LoginInterceptor;
 
 /**
  * @author yubin
@@ -27,6 +30,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 				container.addErrorPages(error401Page, error404Page, error500Page);
 			}
 		};
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/*")
+			.excludePathPatterns("/systemlogin")
+			.excludePathPatterns("/verifyCodeImage")
+			.excludePathPatterns("/doSystemLogin");
 	}
 
 }

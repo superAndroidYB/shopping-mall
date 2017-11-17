@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>TESORI DI FEI</title>
+<link rel="stylesheet" href="layui/css/layui.css">
+<script src="layui/layui.js"></script>
+<script src="js/app.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+
+<style type="text/css">
+body {
+	background: url("images/loginbg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
+.logindiv {
+	position: fixed;
+	top: 20%;
+	right: 20%;
+	width: 20%;
+	height: 40%;
+	background-color: #02020259;
+	padding: 20px;
+}
+
+label {
+	color: white;
+	font-size: 1rem;
+}
+</style>
+</head>
+<body>
+	<div class="logindiv">
+		<div style="text-align: center;">
+			<font style="color: white; font-size: 2em;">TESORI DI FEI</font>
+		</div>
+		<br />
+		<hr />
+		<form id="userinfo" class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户名</label>
+				<div class="layui-input-block">
+					<input type="text" id="userName" name="userName" required
+						lay-verify="required" placeholder="用户名/手机号" autocomplete="off"
+						class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+				<div class="layui-input-block">
+					<input type="password" id="userPassword" name="userPassword"
+						required lay-verify="required" placeholder="请输入密码"
+						autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label"></label> <img id="verifyImage"
+					alt="" th:src="@{/verifyCodeImage}"> <a href="javascript:;"
+					onclick="changeVerifyCode()" style="color: blue;">看不清，换一张</a>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">验证码</label>
+				<div class="layui-input-inline">
+					<input type="text" id="randomCode" name="randomCode" required
+						lay-verify="required" placeholder="请输入验证码" autocomplete="off"
+						class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="formDemo">立即登录</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+		function changeVerifyCode() {
+			var img = document.getElementById("verifyImage");
+			img.src = "./verifyCodeImage?date=" + new Date();
+		}
+
+		
+
+		layui.use('form', function() {
+			var form = layui.form;
+
+			//监听提交
+			form.on('submit(formDemo)', function(data) {
+				$.ajax({
+					url : "doSystemLogin",
+					data : data.field,
+					async : false,
+					success : function(result) {
+						if (result == "0") {
+							layer.msg("用户名不存在！");
+						} else if (result == "1") {
+							layer.msg("用户名密码错误！");
+						} else if (result == '2') {
+							layer.msg("验证码错误");
+						} else if (result == '3') {
+							window.location = "./";
+						}
+					},
+					error : function(result) {
+
+					}
+				});
+				return false;
+			});
+		});
+	</script>
+
+
+</body>
+</html>
