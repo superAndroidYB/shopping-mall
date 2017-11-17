@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -15,7 +17,6 @@ import org.hibernate.annotations.Where;
 
 import com.small.user.model.SysUser;
 
-@Where(clause = "delete_flag='N'")
 @MappedSuperclass
 public class BaseEntity {
 
