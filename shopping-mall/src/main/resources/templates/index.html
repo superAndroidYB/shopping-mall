@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>TESORI DI FEI</title>
-    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
     <link rel="stylesheet" href="./build/css/app.css" media="all">
 </head>
@@ -45,13 +45,16 @@
             <div class="layui-side-scroll">
                 <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar >
                     <li class="layui-nav-item" th:each="leftmenu : ${leftMenuList}" th:if="${leftmenu.parentMenu} eq null">
-                        <a class="" href="javascript:;" th:if="${#lists.size(leftmenu.chlidMenus)} gt 0"><i class="fa fa-plug" aria-hidden="true"></i><span th:text="${leftmenu.menuName}">基本元素</span></a>
-                        <a href="javascript:;" th:unless="${#lists.size(leftmenu.chlidMenus)} gt 0" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span th:text="${leftmenu.menuName}"> 表单(page)</span></a>
+                        <a class="" href="javascript:;" th:if="${#lists.size(leftmenu.chlidMenus)} gt 0">
+                        	<i class="fa fa-plug" aria-hidden="true"></i><span th:text="${leftmenu.menuName}">基本元素</span></a>
+                        <a href="javascript:;" th:unless="${#lists.size(leftmenu.chlidMenus)} gt 0" th:attr="data-url=${leftmenu.menuHref},data-icon=${leftmenu.menuIcon},data-title=${leftmenu.menuName},data-id=${leftmenu.id}" kit-target>
+                        	<i class="fa fa-plug" aria-hidden="true">
+                        	</i><span th:text="${leftmenu.menuName}"> 表单(page)</span></a>
                         <dl class="layui-nav-child" th:if="${#lists.size(leftmenu.chlidMenus)} gt 0">
                             <dd th:each="childmenu : ${leftmenu.chlidMenus}">
-                                <a href="javascript:;" kit-target data-options="{url:'./',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                <a href="javascript:;" th:attr="data-url=${childmenu.menuHref},data-icon=${childmenu.menuIcon},data-title=${childmenu.menuName},data-id=${childmenu.id}" kit-target>
                                     <i class="layui-icon">&#xe6c6;</i><span th:text="${childmenu.menuName}"> 表格</span></a>
                             </dd>
                             <!-- <dd>
@@ -102,7 +105,7 @@
         var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
     </script>
-    <script src="./plugins/layui/layui.js"></script>
+    <script src="./layui/layui.js"></script>
     <script type="text/javascript">
     
         var message;
