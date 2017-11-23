@@ -22,7 +22,7 @@ import com.small.user.service.ISysUserService;
 import com.small.utils.VerifyCodeUtils;
 
 @Controller
-public class ViewController {
+public class UserViewController {
 
 	@Autowired
 	private HttpSession session;

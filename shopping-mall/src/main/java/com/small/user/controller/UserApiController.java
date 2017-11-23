@@ -11,7 +11,7 @@ import com.small.user.model.SysUser;
 import com.small.user.service.ISysUserService;
 
 @RestController
-public class ApiController {
+public class UserApiController {
 	
 	
 	@Resource(name = ISysUserService.BEAN_ID)
